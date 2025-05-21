@@ -1,0 +1,16 @@
+body {
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    height: 100vh;
+}
+.calculator {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns */
+    grid-template-rows: repeat(5, auto);   /* 5 rows */
+    gap: 5px; /* Optional: small spacing so you can visually see the grid works */
+}
+
+#zero {
+    grid-column: span 2;
+}
