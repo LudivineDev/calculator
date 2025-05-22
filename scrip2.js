@@ -30,10 +30,18 @@ const displayInput = document.querySelector(".display");
 function updateDisplay (value) {
     displayInput.value = value;
 }
-
+// Step 5 show number appearing on display once clicked
 const numberButtons = document.querySelectorAll(".number");
 numberButtons.forEach(button => {
   button.addEventListener("click", () => {
     updateDisplay(button.textContent);
   });
 });
+
+// Step 5 show operator appearing on display once clicked
+const operatorButtons = document.querySelectorAll(".operator");
+operatorButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        updateDisplay(button.textContent);
+    })
+})
