@@ -30,8 +30,10 @@ const displayInput = document.querySelector(".display");
 function updateDisplay (value) {
     if (displayInput.value === "0") { // loop adding multiple number on display
         displayInput.value = value;
+        currentNumber = value;
     } else {
         displayInput.value += value;
+        currentNumber += value;
     }
     }
 // Step 5 show number appearing on display once clicked
