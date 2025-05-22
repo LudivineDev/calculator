@@ -28,15 +28,19 @@ function operate (op, n1, n2) {
 const displayInput = document.querySelector(".display");
 
 function updateDisplay (value) {
-    displayInput.value = value;
-}
+    if (displayInput.value === "0") { // loop adding multiple number on display
+        displayInput.value = value;
+    } else {
+        displayInput.value += value;
+    }
+    }
 // Step 5 show number appearing on display once clicked
 const numberButtons = document.querySelectorAll(".number");
 numberButtons.forEach(button => {
   button.addEventListener("click", () => {
     updateDisplay(button.textContent);
   });
-});
+})
 
 // Step 5 show operator appearing on display once clicked
 const operatorButtons = document.querySelectorAll(".operator");
