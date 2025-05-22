@@ -30,7 +30,7 @@ const displayInput = document.querySelector(".display");
 function updateDisplay (value) {
     if (displayInput.value === "0") { // loop adding multiple number on display
         displayInput.value = value;
-        currentNumber = value;
+        currentNumber = value; // Store clicked number into currentNumber
     } else {
         displayInput.value += value;
         currentNumber += value;
@@ -48,6 +48,9 @@ numberButtons.forEach(button => {
 const operatorButtons = document.querySelectorAll(".operator");
 operatorButtons.forEach(button => {
     button.addEventListener("click", () => {
-        updateDisplay(button.textContent);
+        previousNumber = displayInput.value; //store the current number once operator is clicked
+        operator = button.textContent; //store the operator
+        currentNumber = "" // reset the current number to be ready for the next click
+        displayInput.value = previousNumber + "" + operator; //show operation on display
     })
 })
