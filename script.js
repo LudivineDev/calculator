@@ -13,7 +13,7 @@ let operator = "";
 let resetAfterResult = false;
 
 // Display
-const display = document.querySelector(".display");
+const display = document.querySelector(".current-display");
 
 function updateDisplay(value) {
   display.value = value;

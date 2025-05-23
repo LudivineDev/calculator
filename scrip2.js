@@ -106,5 +106,6 @@ function changeSign() {
 
 document.getElementById("sign").addEventListener("click", changeSign);
 
-
+// Creating a second display for the operation
+const previousDisplay = document.getElementById("previousDisplay");
     
