@@ -8,6 +8,7 @@ const divide = (n1, n2) =>  n2 === 0 ? "Well...": n1 / n2
 let previousNumber = "";
 let currentNumber = "";
 let operator = "";
+let resultJustDisplayed = false;
 
 // Step 3 operate takes an operator and two numbers and then calls one of the above functions on the numbers.
 function operate (op, n1, n2) {
@@ -25,12 +26,13 @@ function operate (op, n1, n2) {
     }
 }
 // Step 5 Display Function
-const displayInput = document.querySelector(".display");
+const displayInput = document.querySelector(".current-display");
 
 function updateDisplay (value) {
-    if (displayInput.value === "0") { // loop adding multiple number on display
+    if (displayInput.value === "0" || resultJustDisplayed) { // loop adding multiple number on display
         displayInput.value = value;
         currentNumber = value; // Store clicked number into currentNumber
+        resultJustDisplayed = false;
     } else {
         displayInput.value += value;
         currentNumber += value;
@@ -53,10 +55,15 @@ operatorButtons.forEach(button => {
 
     if (button.id === "equal") return;// Skip if this is the equal button
 
+    if (resultJustDisplayed) {
+        resultJustDisplayed = false; // reset after a chain
+    }
+
         previousNumber = displayInput.value; //store the current number once operator is clicked
         operator = button.textContent; //store the operator
         currentNumber = "" // reset the current number to be ready for the next click
-        displayInput.value = previousNumber + "" + operator; //show operation on display
+        previousDisplay.textContent = `${previousNumber} ${operator}`; // show operation above
+        displayInput.value = ""; // clear for new number input
     })
 })
 
@@ -67,12 +74,14 @@ function calculate () {
     equalButton.addEventListener("click",() => {
         if (previousNumber !=="" && operator !=="" && currentNumber !=="") {
             const result = operate(operator,Number(previousNumber),  Number(currentNumber))
+            previousDisplay.textContent = `${previousNumber} ${operator} ${currentNumber} =`; // full expression
             displayInput.value=result;
 
              // reset for further calculations
              previousNumber = result;
              currentNumber = "";
              operator = "";
+             resultJustDisplayed = true;
         }
     });
 }
@@ -86,6 +95,7 @@ function clearAll() {
     previousNumber = "";
     operator = "";
     displayInput.value = "0";
+    previousDisplay.textContent="";
 }
 
 document.getElementById("AC").addEventListener("click", clearAll);
