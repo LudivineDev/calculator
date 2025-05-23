@@ -74,18 +74,15 @@ function calculate () {
     });
 }
 calculate();
+
 // Step 7
-function clearAll() {
+
+// AC button
+function clearAll() { 
     currentNumber = "";
     previousNumber = "";
     operator = "";
-    updateDisplay("0");
+    displayInput.value = "0";
 }
 
-// AC button
 document.getElementById("AC").addEventListener("click", clearAll);
-    
-
-
-
-    
