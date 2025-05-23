@@ -86,3 +86,22 @@ function clearAll() {
 }
 
 document.getElementById("AC").addEventListener("click", clearAll);
+    
+// +/- button
+function changeSign() {
+    if (displayInput.value === "0") return; // Do nothing if display is zero
+
+    if (displayInput.value.startsWith("-")) {
+        displayInput.value = displayInput.value.slice(1);
+    } else {
+        displayInput.value = "-" + displayInput.value;
+    }
+
+    // Update currentNumber too, so future calculations use the correct value
+    currentNumber = displayInput.value;
+}
+
+document.getElementById("sign").addEventListener("click", changeSign);
+
+
+    
