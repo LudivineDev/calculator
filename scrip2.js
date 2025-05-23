@@ -49,7 +49,10 @@ const operatorButtons = document.querySelectorAll(".operator");
 operatorButtons.forEach(button => {
     
     button.addEventListener("click", () => {
+    if (displayInput.value === "0" || displayInput.value === "") return;// Prevent clicking operator if display is still at "0" or empty
+
     if (button.id === "equal") return;// Skip if this is the equal button
+
         previousNumber = displayInput.value; //store the current number once operator is clicked
         operator = button.textContent; //store the operator
         currentNumber = "" // reset the current number to be ready for the next click
@@ -92,7 +95,7 @@ function changeSign() {
     if (displayInput.value === "0") return; // Do nothing if display is zero
 
     if (displayInput.value.startsWith("-")) {
-        displayInput.value = displayInput.value.slice(1);
+        displayInput.value = displayInput.value.slice(1); //removes the first character
     } else {
         displayInput.value = "-" + displayInput.value;
     }
