@@ -32,6 +32,7 @@ function updateDisplay (value) {
     if (displayInput.value === "0" || resultJustDisplayed) { // loop adding multiple number on display
         displayInput.value = value;
         currentNumber = value; // Store clicked number into currentNumber
+        previousDisplay.textContent = "";
         resultJustDisplayed = false;
     } else {
         displayInput.value += value;
@@ -118,4 +119,17 @@ document.getElementById("sign").addEventListener("click", changeSign);
 
 // Creating a second display for the operation
 const previousDisplay = document.getElementById("previousDisplay");
-    
+
+
+ // % button   
+ document.getElementById("percent").addEventListener("click", () => {
+    if (previousNumber !== "" && operator !== "" && currentNumber !== "") {
+        // Convert currentNumber to percentage of previousNumber
+        currentNumber = (Number(currentNumber) / 100) * Number(previousNumber);
+        displayInput.value = currentNumber;
+    } else if (currentNumber !== "") {
+        // Just get the percentage of the current number (e.g. "50%" becomes "0.5")
+        currentNumber = Number(currentNumber) / 100;
+        displayInput.value = currentNumber;
+    }
+});
