@@ -13,8 +13,28 @@ body {
     font-size: 300%;
     min-height: 80px;
     padding: 20px;
-    
+    background-color: white;
+    color: black;
+    overflow: hidden;
 }
+
+.previous-display {
+    font-size: 18px;
+    color: gray;
+      }
+      
+.current-display {
+    font-size: 36px;
+    border: none;
+    text-align: right;
+    background: none;
+    outline: none;
+    color:black;
+    width: 100%;        
+    box-sizing: border-box;
+      }
+    
+
 .calculator {
     display: grid;
     grid-template-columns: repeat(4, 1fr); /* 4 columns */
