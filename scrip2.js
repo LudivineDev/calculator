@@ -14,9 +14,9 @@ function operate (op, n1, n2) {
     switch (op) {
         case "+":
             return add(n1, n2);
-        case "-":
+        case "−":
             return substract(n1,n2);
-        case "x":
+        case "×":
             return multiply(n1, n2);
         case "÷":
             return divide (n1, n2);
@@ -47,10 +47,45 @@ numberButtons.forEach(button => {
 // Step 5 show operator appearing on display once clicked
 const operatorButtons = document.querySelectorAll(".operator");
 operatorButtons.forEach(button => {
+    
     button.addEventListener("click", () => {
+    if (button.id === "equal") return;// Skip if this is the equal button
         previousNumber = displayInput.value; //store the current number once operator is clicked
         operator = button.textContent; //store the operator
         currentNumber = "" // reset the current number to be ready for the next click
         displayInput.value = previousNumber + "" + operator; //show operation on display
     })
 })
+
+// Step 6 Make the calculator work!
+const equalButton = document.querySelector("#equal");
+
+function calculate () {
+    equalButton.addEventListener("click",() => {
+        if (previousNumber !=="" && operator !=="" && currentNumber !=="") {
+            const result = operate(operator,Number(previousNumber),  Number(currentNumber))
+            displayInput.value=result;
+
+             // reset for further calculations
+             previousNumber = result;
+             currentNumber = "";
+             operator = "";
+        }
+    });
+}
+calculate();
+// Step 7
+function clearAll() {
+    currentNumber = "";
+    previousNumber = "";
+    operator = "";
+    updateDisplay("0");
+}
+
+// AC button
+document.getElementById("AC").addEventListener("click", clearAll);
+    
+
+
+
+    
