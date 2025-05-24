@@ -57,29 +57,31 @@ const operatorButtons = document.querySelectorAll(".operator");
 operatorButtons.forEach(button => {
     
     button.addEventListener("click", () => {
-    if (displayInput.value === "0" || displayInput.value === "") return;// Prevent clicking operator if display is still at "0" or empty
-    if (button.id === "equal") return;// Skip if this is the equal button
+        if (displayInput.value === "0" || displayInput.value === "") return; // Prevent clicking operator if display is still at "0" or empty
+        if (button.id === "equal") return; // Skip if this is the equal button
 
-    if (resultJustDisplayed) resultJustDisplayed = false;  // reset after a chain 
-        
-// If there's a full operation pending, calculate it first
-if (previousNumber !== "" && operator !== "" && currentNumber !== "") {
-    let result = operate(operator, Number(previousNumber), Number(currentNumber));
-    if (typeof result === "number") result = Math.round(result * 1000) / 1000;
+        if (resultJustDisplayed) {
+            resultJustDisplayed = false; // reset after a chain
+        }
 
-    previousNumber = result.toString();
-    currentNumber = "";
-    displayInput.value = ""; // Clear for next number
-    resultJustDisplayed = false;
-  } else {
-    previousNumber = displayInput.value;
-  }
+        // If there's already a previousNumber and operator, perform the calculation first
+        if (previousNumber !== "" && operator !== "" && currentNumber !== "") {
+            let result = operate(operator, Number(previousNumber), Number(currentNumber));
+            if (typeof result === "number") {
+                result = Math.round(result * 1000) / 1000;
+            }
+            previousNumber = result;
+            displayInput.value = "";
+            currentNumber = "";
+        } else {
+            previousNumber = displayInput.value; // store the current number once operator is clicked
+        }
 
-  //  Save new operator (don't display it in current display)
-  operator = button.textContent;
-  previousDisplay.textContent = `${previousNumber} ${operator}`;
-  displayInput.value = ""; // Clear for next input
-});
+        operator = button.textContent; // store the new operator
+        currentNumber = ""; // reset the current number to be ready for the next input
+        previousDisplay.textContent = `${previousNumber} ${operator}`; // show operation above
+        displayInput.value = ""; // clear for new number input
+    });
 });
 
 // Step 6 Make the calculator work!
@@ -151,8 +153,8 @@ const previousDisplay = document.getElementById("previousDisplay");
     }
 });
 
- // ⌫ button  
- document.getElementById("backSpace").addEventListener("click", () => {
+  // ⌫ button  
+  document.getElementById("backSpace").addEventListener("click", () => {
     if (resultJustDisplayed) return;   // Prevent editing the result with backspace
     // Handle case when operator was just entered and display is empty
     if (displayInput.value === "" && previousDisplay.textContent && operator !== "") {
