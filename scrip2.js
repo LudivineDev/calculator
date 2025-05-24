@@ -144,12 +144,20 @@ const previousDisplay = document.getElementById("previousDisplay");
 
  // ⌫ button  
  document.getElementById("backSpace").addEventListener("click",() => {
-    if (displayInput.value.lenght > 1 ) {
-        displayInput.value = displayInput.value.slice (0,-1);
-        currentNumber = currentNumber.slice (0,-1);
-    } else {
-        // If it's the last character, reset to "0"
-        displayInput.value = "0";
-        currentNumber = "";
+    if (resultJustDisplayed) return; // Don't allow backspace after result
+
+    if (currentNumber !== "") {
+        // Remove last digit from current number
+        currentNumber = currentNumber.slice(0, -1);
+        displayInput.value = currentNumber || "0";
+    } else if (operator !== "") {
+        // If no currentNumber yet, remove the operator
+        operator = "";
+        previousDisplay.textContent = "";
+        displayInput.value = previousNumber; // show the previous number again
+    } else if (previousNumber !== "") {
+        // If no operator either, erase from previous number
+        previousNumber = previousNumber.toString().slice(0, -1);
+        displayInput.value = previousNumber || "0";
     }
 });
