@@ -1,7 +1,7 @@
 // Step 1 Math function\
 const add = (n1,n2) => n1 + n2;
 const substract = (n1, n2) => n1 - n2;
-const multiply = (n1, n2) => n2 === 0 ? "Error": n1 * n2;
+const multiply = (n1, n2) => n1 * n2;
 const divide = (n1, n2) =>  n2 === 0 ? "Well...": n1 / n2
 
 // Step 2 Operations\ For example, 3 + 5. Create three variables
