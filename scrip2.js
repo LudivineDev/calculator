@@ -33,13 +33,17 @@ function updateDisplay (value) {
     if (displayInput.value === "0" || resultJustDisplayed) { // loop adding multiple number on display
         displayInput.value = value;
         currentNumber = value; // Store clicked number into currentNumber
-        previousDisplay.textContent = "";
-        resultJustDisplayed = false;
+        
+        // Only clear previousDisplay if a result was just displayed
+        if (resultJustDisplayed) {
+            previousDisplay.textContent = "";
+            resultJustDisplayed = false;
+        }
     } else {
         displayInput.value += value;
         currentNumber += value;
     }
-    }
+}
 // Step 5 show number appearing on display once clicked
 const numberButtons = document.querySelectorAll(".number");
 numberButtons.forEach(button => {
@@ -135,5 +139,17 @@ const previousDisplay = document.getElementById("previousDisplay");
         // Just get the percentage of the current number (e.g. "50%" becomes "0.5")
         currentNumber = Number(currentNumber) / 100;
         displayInput.value = currentNumber;
+    }
+});
+
+ // ⌫ button  
+ document.getElementById("backSpace").addEventListener("click",() => {
+    if (displayInput.value.lenght > 1 ) {
+        displayInput.value = displayInput.value.slice (0,-1);
+        currentNumber = currentNumber.slice (0,-1);
+    } else {
+        // If it's the last character, reset to "0"
+        displayInput.value = "0";
+        currentNumber = "";
     }
 });
