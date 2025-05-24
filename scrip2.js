@@ -29,6 +29,7 @@ function operate (op, n1, n2) {
 const displayInput = document.querySelector(".current-display");
 
 function updateDisplay (value) {
+    if (value === "." && currentNumber.includes(".")) return; //prevent multiple dots like 7.3.4
     if (displayInput.value === "0" || resultJustDisplayed) { // loop adding multiple number on display
         displayInput.value = value;
         currentNumber = value; // Store clicked number into currentNumber
