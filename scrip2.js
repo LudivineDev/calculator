@@ -144,6 +144,7 @@ const previousDisplay = document.getElementById("previousDisplay");
 
  // ⌫ button  
  document.getElementById("backSpace").addEventListener("click", () => {
+    if (resultJustDisplayed) return;   // Prevent editing the result with backspace
     // Handle case when operator was just entered and display is empty
     if (displayInput.value === "" && previousDisplay.textContent && operator !== "") {
         displayInput.value = previousNumber;
