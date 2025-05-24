@@ -9,8 +9,10 @@
 <body>
     <div class="calculator">
        
-        <div class="previous-display" id="previousDisplay"></div>  <!-- History of operation display -->
-        <input class="display" readonly value="0" />
+        <div class="display">
+            <div class="previous-display" id="previousDisplay"></div>
+            <input type="text" class="current-display" readonly value="0">
+        </div>
 
         <button class="top" id="AC">AC</button>
         <button class="top" id="sign">+/-</button>
