@@ -144,6 +144,16 @@ const previousDisplay = document.getElementById("previousDisplay");
 
  // ⌫ button  
  document.getElementById("backSpace").addEventListener("click", () => {
+    // Handle case when operator was just entered and display is empty
+    if (displayInput.value === "" && previousDisplay.textContent && operator !== "") {
+        displayInput.value = previousNumber;
+        currentNumber = previousNumber;
+        previousNumber = "";
+        operator = "";
+        previousDisplay.textContent = "";
+        return;
+    }
+
     if (displayInput.value.length > 1) {
         displayInput.value = displayInput.value.slice(0, -1);
         currentNumber = displayInput.value; // sync currentNumber with display
