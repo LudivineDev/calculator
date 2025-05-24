@@ -74,7 +74,10 @@ const equalButton = document.querySelector("#equal");
 function calculate () {
     equalButton.addEventListener("click",() => {
         if (previousNumber !=="" && operator !=="" && currentNumber !=="") {
-            const result = operate(operator,Number(previousNumber),  Number(currentNumber))
+            let result = operate(operator,Number(previousNumber),  Number(currentNumber))
+            if (typeof result === "number") {
+                result = Math.round(result * 1000)/1000; //round to 3 decimals
+            }
             previousDisplay.textContent = `${previousNumber} ${operator} ${currentNumber} =`; // full expression
             displayInput.value=result;
 
