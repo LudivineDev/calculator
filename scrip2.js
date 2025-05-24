@@ -143,12 +143,11 @@ const previousDisplay = document.getElementById("previousDisplay");
 });
 
  // ⌫ button  
- document.getElementById("backSpace").addEventListener("click",() => {
-    if (displayInput.value.length > 1 ) {
-        displayInput.value = displayInput.value.slice (0,-1);
-        currentNumber = currentNumber.slice (0,-1);
+ document.getElementById("backSpace").addEventListener("click", () => {
+    if (displayInput.value.length > 1) {
+        displayInput.value = displayInput.value.slice(0, -1);
+        currentNumber = displayInput.value; // sync currentNumber with display
     } else {
-        // If it's the last character, reset to "0"
         displayInput.value = "0";
         currentNumber = "";
     }
