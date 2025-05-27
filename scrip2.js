@@ -174,3 +174,58 @@ const previousDisplay = document.getElementById("previousDisplay");
         currentNumber = "";
     }
 });
+
+
+//Step 8 Add Keyboard Support
+function handleOperator(key) {
+    const operatorMap = {
+        "+": "+",
+        "-": "−",
+        "*": "×",
+        "/": "÷"
+    };
+
+    const operatorButton = Array.from(operatorButtons).find(
+        btn => btn.textContent === operatorMap[key]
+    );
+
+    if (operatorButton) {
+        operatorButton.click();
+    }
+}
+
+window.addEventListener("keydown", function (event) {
+    const key = event.key;
+
+    // Allow numbers
+    if (!isNaN(key)) {
+        updateDisplay(key);
+        return;
+    }
+
+    // Allow operators
+    switch (key) {
+        case "+":
+        case "-":
+        case "*":
+        case "/":
+            handleOperator(key);
+            break;
+        case "Enter":
+        case "=":
+            equalButton.click();
+            break;
+        case "Backspace":
+            document.getElementById("backSpace").click();
+            break;
+        case "Escape":
+            document.getElementById("AC").click();
+            break;
+        case ".":
+            updateDisplay(".");
+            break;
+        case "%":
+            document.getElementById("percent").click();
+            break;
+    }
+});
